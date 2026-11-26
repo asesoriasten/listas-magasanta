@@ -271,20 +271,25 @@
   function linkLista(codigo) { return BASE + '?c=' + encodeURIComponent(codigo); }
   function linkMi(privado) { return BASE + '?p=' + encodeURIComponent(privado); }
 
-  function mensajeCompartir(codigo) {
+  function mensajeCompartir(codigo, venceTexto) {
     const t = estado.cat ? estado.cat.tienda : null;
-    return '¡Hola! 🎄 Armé mi lista de deseos en Maga Santa. Si quieres regalarme algo, mira aquí qué me falta:\n' +
-      linkLista(codigo) + '\nComprando de mi lista tienes ' + (t ? pct(t.pct_regalo) : '15%') + ' de descuento 💚';
+    const dir = t && t.direccion ? ' (' + t.direccion + ')' : '';
+    return '¡Hola! 🎄 Armé mi lista de deseos en Maga Santa ✨\n' +
+      'Si quieres regalarme algo, aquí ves lo que pedí y lo que ya me regalaron:\n' + linkLista(codigo) + '\n\n' +
+      '🎁 En la tienda' + dir + ' muestra mi código *' + codigo + '* y tienes *' + (t ? pct(t.pct_regalo) : '15%') +
+      ' de descuento* en lo de mi lista' + (venceTexto ? ', hasta el ' + venceTexto : '') + ' 💚';
   }
 
   function pintarPaso3() {
     const r = estado.resultado;
     const t = estado.cat.tienda;
-    const wa = 'https://wa.me/?text=' + encodeURIComponent(mensajeCompartir(r.codigo));
+    const wa = 'https://wa.me/?text=' + encodeURIComponent(mensajeCompartir(r.codigo, r.vence_texto));
     const numero = '56' + String(estado.datos.whatsapp).replace(/\D/g, '').replace(/^56/, '');
     const paraMi = 'https://wa.me/' + numero + '?text=' + encodeURIComponent(
-      'Mi lista de deseos Maga Santa ✨\nCódigo: ' + r.codigo + '\nPara compartir: ' + linkLista(r.codigo) +
-      '\nMi avance y mi premio (solo para mí): ' + linkMi(r.codigo_privado));
+      '✨ *Mi lista de deseos · Maga Santa*\n' +
+      'Código: *' + r.codigo + '* · vale hasta el ' + r.vence_texto + '\n\n' +
+      '🔒 *Mi avance y mi premio* (solo para mí, no reenviar este mensaje):\n' + linkMi(r.codigo_privado) + '\n\n' +
+      '🎁 *Para compartir con mis cercanos:*\n' + linkLista(r.codigo));
     cabecera('¡Tu lista está lista, ' + r.nombre.split(' ')[0] + '!', 'Guárdala y compártela con quienes te quieren 💚');
     $app.innerHTML = pasos(3) +
       '<div class="tarjeta centro"><p class="chico">Tu código</p><div class="codigo">' + esc(r.codigo) + '</div>' +
@@ -368,7 +373,7 @@
         'Muestra tu código en la tienda.</p><div class="avance"><div style="width:100%"></div></div>';
     }
     estado.cat = { tienda: t };
-    const wa = 'https://wa.me/?text=' + encodeURIComponent(mensajeCompartir(m.codigo));
+    const wa = 'https://wa.me/?text=' + encodeURIComponent(mensajeCompartir(m.codigo, m.vence_texto));
     $app.innerHTML =
       '<div class="tarjeta centro"><p class="chico">Regalos recibidos</p><p class="grande">' + m.unidades_regaladas + '</p>' +
       '<p class="chico">de ' + m.productos_pedidos + ' que pediste · qué te regalaron es sorpresa 🤫</p></div>' +
