@@ -235,3 +235,7 @@ main { max-width: 640px; margin: 0 auto; padding: 8px 16px 24px; }
 .prueba { background: #fff3cd; color: #7a5b00; text-align: center; font-size: 12px; padding: 6px; font-weight: 600; }
 
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* paso 3: guardar el link privado va primero y resaltado */
+.tarjeta.guardar { border: 2px solid var(--verde-wa); }
+.tarjeta.guardar .destacado { margin: 10px 0 14px; }

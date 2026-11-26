@@ -285,18 +285,24 @@
     const paraMi = 'https://wa.me/' + numero + '?text=' + encodeURIComponent(
       'Mi lista de deseos Maga Santa ✨\nCódigo: ' + r.codigo + '\nPara compartir: ' + linkLista(r.codigo) +
       '\nMi avance y mi premio (solo para mí): ' + linkMi(r.codigo_privado));
-    cabecera('¡Tu lista está lista, ' + r.nombre.split(' ')[0] + '!', 'Ahora compártela con quienes te quieren 💚');
+    cabecera('¡Tu lista está lista, ' + r.nombre.split(' ')[0] + '!', 'Guárdala y compártela con quienes te quieren 💚');
     $app.innerHTML = pasos(3) +
       '<div class="tarjeta centro"><p class="chico">Tu código</p><div class="codigo">' + esc(r.codigo) + '</div>' +
-      '<p class="chico">Vale hasta el ' + esc(r.vence_texto) + '. Quien te regale lo muestra en la tienda y tiene ' + pct(t.pct_regalo) + ' de descuento.</p>' +
+      '<p class="chico">Vale hasta el ' + esc(r.vence_texto) + '. Quien te regale lo muestra en la tienda y tiene ' + pct(t.pct_regalo) + ' de descuento.</p></div>' +
+      '<div class="tarjeta guardar"><h2>1. Guarda tu lista 🔒</h2>' +
+      '<p class="destacado"><b>Importante:</b> envíatela a tu propio WhatsApp. Ese mensaje es <b>tu única forma de volver</b> a ver tu lista, ' +
+      'cuántos regalos llevas y si ganaste tu ' + pct(t.pct_cumple) + ' de cumpleaños.</p>' +
+      '<a class="boton wa" id="guardarMi" href="' + esc(paraMi) + '" target="_blank" rel="noopener">Guardar en mi WhatsApp</a>' +
+      '<p class="chico">Te llega un mensaje con tu link privado. No lo compartas: ahí ves tu avance (sin saber qué te regalaron, ¡es sorpresa!).</p>' +
+      '<a class="boton texto" href="' + esc(linkMi(r.codigo_privado)) + '">Ver mi avance ahora</a></div>' +
+      '<div class="tarjeta centro"><h2>2. Compártela 💚</h2>' +
+      '<p class="chico">Mándala a quienes te quieren. Ellos ven lo que pediste, pero no tu avance.</p>' +
       '<a class="boton wa" href="' + esc(wa) + '" target="_blank" rel="noopener">Compártela por WhatsApp</a>' +
-      '<button class="boton claro" type="button" id="copiar">Copiar link</button></div>' +
-      '<div class="tarjeta"><h2>🔒 Tu link privado</h2>' +
-      '<p>Ahí ves cuántos regalos llevas y cuánto te falta para tu ' + pct(t.pct_cumple) + ' de cumpleaños (sin saber qué te regalaron: ¡es sorpresa!).</p>' +
-      '<p class="chico">No lo compartas. Guárdalo enviándotelo a tu propio WhatsApp:</p>' +
-      '<a class="boton claro" href="' + esc(paraMi) + '" target="_blank" rel="noopener">Guardar en mi WhatsApp</a>' +
-      '<a class="boton texto" href="' + esc(linkMi(r.codigo_privado)) + '">Ver mi avance ahora</a></div>';
+      '<button class="boton claro" type="button" id="copiar">Copiar link</button></div>';
     document.getElementById('copiar').addEventListener('click', () => copiar(linkLista(r.codigo)));
+    document.getElementById('guardarMi').addEventListener('click', function () {
+      this.textContent = '✓ Enviado a mi WhatsApp (toca para enviar otra vez)';
+    });
   }
 
   // ========================================================= 2. COMPARTIDA ===
