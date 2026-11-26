@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lista de Deseos · Maga Santa</title>
+  <meta name="description" content="Esta Navidad, pide tu magia ✨ Arma tu lista de deseos en Maga Santa y compártela con quienes te quieren.">
+  <meta property="og:title" content="Lista de Deseos · Maga Santa">
+  <meta property="og:description" content="Esta Navidad, pide tu magia ✨ Belleza natural y magia botánica desde Pucón.">
+  <meta property="og:image" content="logo.png">
+  <meta name="theme-color" content="#21374e">
+  <link rel="icon" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <header class="cabecera">
+    <img class="logo" src="logo.png" alt="Maga Santa" width="88" height="88">
+    <p class="marca">Bazar Maga Santa · Pucón</p>
+    <h1 id="titulo">Lista de Deseos</h1>
+    <p id="bajada" class="bajada"></p>
+  </header>
+
+  <main id="app" aria-live="polite">
+    <div class="cargando"><span class="punto"></span><span class="punto"></span><span class="punto"></span></div>
+  </main>
+
+  <footer id="pie" class="pie" hidden></footer>
+
+  <div id="barra" class="barra" hidden></div>
+  <div id="aviso" class="aviso" role="status" hidden></div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+/* Lista de Deseos Maga Santa — azul de la marca, crema y un toque dorado navideño. */
+:root {
+  --azul: #21374e;
+  --azul-2: #2f4a66;
+  --crema: #faf6ef;
+  --papel: #ffffff;
+  --arena: #efe7d8;
+  --texto: #26313d;
+  --suave: #6b7480;
+  --dorado: #b8904a;
+  --dorado-claro: #f3e9d4;
+  --verde: #4a7c4e;
+  --verde-wa: #1f9d55;
+  --rojo: #b4453c;
+  --borde: #e4dccd;
+  --radio: 14px;
+  --sombra: 0 1px 2px rgba(33, 55, 78, .06), 0 6px 20px rgba(33, 55, 78, .07);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: 'Montserrat', system-ui, sans-serif;
+  color: var(--texto);
+  background: var(--crema);
+  line-height: 1.5;
+  padding-bottom: 96px;
+}
+button, input, select { font: inherit; color: inherit; }
+a { color: var(--azul); }
+
+/* --------------------------------------------------------------- cabecera */
+.cabecera {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+  padding: 28px 20px 40px;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(255,255,255,.08) 0 2px, transparent 3px),
+    radial-gradient(circle at 82% 30%, rgba(255,255,255,.10) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 65% 75%, rgba(255,255,255,.07) 0 2px, transparent 3px),
+    radial-gradient(circle at 30% 85%, rgba(243,233,212,.12) 0 1.5px, transparent 2.5px),
+    linear-gradient(160deg, var(--azul) 0%, var(--azul-2) 100%);
+}
+.cabecera::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: -1px; height: 22px;
+  background: var(--crema);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+.logo { width: 88px; height: 88px; border-radius: 50%; box-shadow: 0 0 0 3px rgba(255,255,255,.25); }
+.marca { margin: 10px 0 2px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; opacity: .8; }
+.cabecera h1 {
+  margin: 4px auto 6px;
+  max-width: 560px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(30px, 7vw, 44px);
+  line-height: 1.1;
+}
+.bajada { margin: 0 auto; max-width: 480px; font-size: 15px; opacity: .92; }
+
+/* ---------------------------------------------------------------- general */
+main { max-width: 640px; margin: 0 auto; padding: 8px 16px 24px; }
+.tarjeta {
+  background: var(--papel);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 18px;
+  margin: 14px 0;
+}
+.tarjeta h2 { margin: 0 0 6px; font-size: 18px; color: var(--azul); }
+.tarjeta p { margin: 6px 0; }
+.chico { font-size: 13px; color: var(--suave); }
+.centro { text-align: center; }
+
+.pasos { display: flex; gap: 6px; justify-content: center; margin: 6px 0 4px; }
+.paso { font-size: 12px; padding: 4px 10px; border-radius: 999px; background: var(--arena); color: var(--suave); }
+.paso.activo { background: var(--azul); color: #fff; }
+
+.destacado {
+  background: var(--dorado-claro);
+  border: 1px dashed var(--dorado);
+  border-radius: var(--radio);
+  padding: 12px 14px;
+  font-size: 14px;
+}
+
+/* -------------------------------------------------------------- productos */
+.buscar {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: var(--papel);
+  margin: 12px 0 4px;
+}
+.producto {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--papel);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 12px 14px;
+  margin: 10px 0;
+  transition: border-color .15s, box-shadow .15s;
+}
+.producto.elegido { border-color: var(--azul); box-shadow: 0 0 0 1px var(--azul) inset; }
+.producto.regalado { opacity: .6; background: #f7f5f0; }
+.producto .info { flex: 1; min-width: 0; }
+.producto .nombre { font-weight: 600; font-size: 15px; }
+.precio { font-size: 14px; color: var(--suave); }
+.precio s { margin-right: 6px; }
+.precio b { color: var(--verde); }
+.etiqueta { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; margin-top: 4px; }
+.etiqueta.ok { background: #e7f1e7; color: var(--verde); }
+.etiqueta.listo { background: #ecebe7; color: var(--suave); }
+
+.cantidad { display: flex; align-items: center; gap: 6px; }
+.cantidad button {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid var(--borde); background: var(--crema);
+  font-size: 20px; line-height: 1; cursor: pointer;
+}
+.cantidad button:disabled { opacity: .35; cursor: default; }
+.cantidad span { min-width: 20px; text-align: center; font-weight: 700; color: var(--azul); }
+
+/* --------------------------------------------------------------- botones */
+.boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%;
+  padding: 14px 18px;
+  border: 0; border-radius: 999px;
+  background: var(--azul); color: #fff;
+  font-weight: 600; font-size: 16px;
+  text-decoration: none; cursor: pointer;
+  margin: 8px 0;
+}
+.boton:disabled { opacity: .5; cursor: default; }
+.boton.wa { background: var(--verde-wa); }
+.boton.claro { background: var(--papel); color: var(--azul); border: 1px solid var(--azul); }
+.boton.texto { background: none; color: var(--suave); text-decoration: underline; font-weight: 500; }
+
+.barra {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 5;
+  background: rgba(255,255,255,.96);
+  border-top: 1px solid var(--borde);
+  box-shadow: 0 -4px 16px rgba(33,55,78,.08);
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+}
+.barra .dentro { max-width: 640px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+.barra .resumen { flex: 1; font-size: 14px; }
+.barra .boton { width: auto; margin: 0; padding: 12px 22px; }
+
+/* -------------------------------------------------------------- formulario */
+.campo { margin: 14px 0; }
+.campo label, .campo .rotulo { display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px; }
+.campo input[type=text], .campo input[type=tel], .campo select {
+  width: 100%; padding: 12px 14px;
+  border: 1px solid var(--borde); border-radius: 10px; background: var(--papel);
+}
+.campo input:focus, .campo select:focus, .buscar:focus { outline: 2px solid var(--azul); outline-offset: 1px; }
+.fila { display: flex; gap: 10px; }
+.fila > * { flex: 1; }
+.prefijo { display: flex; align-items: stretch; }
+.prefijo span {
+  display: flex; align-items: center; padding: 0 12px;
+  border: 1px solid var(--borde); border-right: 0; border-radius: 10px 0 0 10px;
+  background: var(--arena); font-size: 14px;
+}
+.prefijo input { border-radius: 0 10px 10px 0 !important; }
+.opciones label {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; margin: 8px 0;
+  border: 1px solid var(--borde); border-radius: 10px; background: var(--papel);
+  font-weight: 500; cursor: pointer;
+}
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; margin: 12px 0; cursor: pointer; }
+.check input { margin-top: 3px; width: 18px; height: 18px; flex: none; }
+.error { color: var(--rojo); font-size: 14px; font-weight: 600; margin: 8px 0; }
+
+/* ------------------------------------------------------------------ código */
+.codigo {
+  font-family: 'Montserrat', monospace;
+  font-weight: 700;
+  font-size: clamp(20px, 6vw, 28px);
+  letter-spacing: .06em;
+  color: var(--azul);
+  background: var(--crema);
+  border: 2px dashed var(--dorado);
+  border-radius: 12px;
+  padding: 12px;
+  margin: 10px 0;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* ------------------------------------------------------------------ avance */
+.avance { height: 14px; background: var(--arena); border-radius: 999px; overflow: hidden; margin: 10px 0 6px; }
+.avance div { height: 100%; background: linear-gradient(90deg, var(--dorado), #d6b26a); border-radius: 999px; transition: width .6s; }
+.grande { font-size: 32px; font-weight: 700; color: var(--azul); line-height: 1.1; }
+
+/* -------------------------------------------------------------------- pie */
+.pie {
+  background: var(--azul); color: #fff;
+  padding: 28px 20px calc(28px + env(safe-area-inset-bottom));
+  margin-top: 24px;
+  font-size: 14px;
+}
+.pie .dentro { max-width: 640px; margin: 0 auto; }
+.pie h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 22px; margin: 0 0 8px; font-weight: 600; }
+.pie a { color: #fff; }
+.pie ul { list-style: none; padding: 0; margin: 6px 0 14px; }
+.pie li { margin: 3px 0; }
+.pie .redes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.pie .redes a {
+  border: 1px solid rgba(255,255,255,.4); border-radius: 999px;
+  padding: 7px 14px; text-decoration: none; font-weight: 600; font-size: 13px;
+}
+.pie .lema { opacity: .7; font-size: 12px; margin-top: 16px; }
+
+/* ------------------------------------------------------------------ varios */
+.aviso {
+  position: fixed; left: 50%; bottom: 96px; transform: translateX(-50%);
+  background: var(--azul); color: #fff; padding: 10px 18px; border-radius: 999px;
+  font-size: 14px; z-index: 10; box-shadow: var(--sombra);
+}
+.cargando { display: flex; justify-content: center; gap: 8px; padding: 60px 0; }
+.punto { width: 10px; height: 10px; border-radius: 50%; background: var(--dorado); animation: latido 1s infinite ease-in-out; }
+.punto:nth-child(2) { animation-delay: .15s; }
+.punto:nth-child(3) { animation-delay: .3s; }
+@keyframes latido { 0%, 80%, 100% { transform: scale(.6); opacity: .4; } 40% { transform: scale(1); opacity: 1; } }
+.prueba { background: #fff3cd; color: #7a5b00; text-align: center; font-size: 12px; padding: 6px; font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
