@@ -208,8 +208,8 @@
       '<div class="campo"><span class="rotulo">Tu cumpleaños <span class="chico">(para tu premio; no pedimos el año)</span></span>' +
       '<div class="fila"><select id="dia" aria-label="Día">' + opcionesNumero(1, 31, d.cumple_dia) + '</select>' +
       '<select id="mes" aria-label="Mes">' + opcionesNumero(1, 12, d.cumple_mes, MESES) + '</select></div></div>' +
-      '<div class="campo"><label for="instagram">Instagram <span class="chico">(opcional)</span></label>' +
-      '<input id="instagram" type="text" autocomplete="off" placeholder="@tu.usuario" maxlength="40" value="' + esc(d.instagram) + '"></div>' +
+      '<div class="campo"><label for="email">Correo electrónico <span class="chico">(opcional)</span></label>' +
+      '<input id="email" type="email" inputmode="email" autocomplete="email" placeholder="nombre@gmail.com" maxlength="100" value="' + esc(d.email) + '"></div>' +
       '<div class="campo"><span class="rotulo">Mi lista vale hasta</span><div class="opciones">' +
       venc.map((v) => '<label><input type="radio" name="vence" value="' + esc(v.valor) + '"' + (d.vence === v.valor ? ' checked' : '') + '> el ' + esc(v.texto) + '</label>').join('') +
       '</div></div>' +
@@ -229,7 +229,7 @@
     const r = document.querySelector('input[name=vence]:checked');
     Object.assign(estado.datos, {
       nombre: v('nombre').value.trim(), apellido: v('apellido').value.trim(), whatsapp: v('whatsapp').value.trim(),
-      cumple_dia: v('dia').value, cumple_mes: v('mes').value, instagram: v('instagram').value.trim(),
+      cumple_dia: v('dia').value, cumple_mes: v('mes').value, email: v('email').value.trim(),
       vence: r ? r.value : '', acepta_datos: v('acepta_datos').checked, acepta_novedades: v('acepta_novedades').checked,
     });
     return estado.datos;
@@ -240,6 +240,7 @@
     if (!d.apellido) return 'Escribe tu apellido.';
     if (String(d.whatsapp).replace(/\D/g, '').length < 8) return 'Escribe tu WhatsApp (por ejemplo 9 1234 5678).';
     if (!d.cumple_dia || !d.cumple_mes) return 'Elige el día y el mes de tu cumpleaños.';
+    if (d.email && !/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(d.email)) return 'Revisa tu correo electrónico (por ejemplo nombre@gmail.com).';
     if (!d.vence) return 'Elige hasta qué fecha vale tu lista.';
     if (!d.acepta_datos) return 'Para crear tu lista necesitamos que aceptes el uso de tus datos.';
     return '';
